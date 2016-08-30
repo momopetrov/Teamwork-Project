@@ -1,0 +1,44 @@
+a {
+    text-decoration: none;
+    color: orangered;
+}
+
+.dot {
+    margin-top: 13px;
+    margin-right: 10px;
+    float: left;
+    width: 20px;
+    border-radius: 40px;
+    background-color: orangered;
+}
+
+.title {
+    font: 32px Oswald;
+    font-weight: 400;
+}
+
+.subtitle {
+    font: 16px Lato;
+    font-weight: 100;
+    margin-left: 3%;
+}
+
+.content {
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    font: 20px Lato;
+    font-weight: 500;
+    width: 100%;
+    margin-left: -10%;
+    word-wrap: break-word;
+    background-color: #565656;
+    border-radius: 10px;
+}
+
+.articles {
+    margin-left: 5%;
+}
+
+.single-post {
+    margin-bottom: 5%;
+}
