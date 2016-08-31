@@ -1,99 +1,42 @@
 ﻿$(document).ready(function () {
-
-
     let tn_array = $(".slides img").map(function () {
         return $(this).attr("src");
     }).get();
-
     $('#MainImage').attr('src', tn_array[0]);
-    $('#Previous').css("visibility", "hidden");
+    $('#Previous').css("visibility", "hidden"); // hidden previous button when is first image
 
     let lengthImages = tn_array.length;
     let CurrImage = 0;
     let widthImg = 200;
-    let BottomLength = 4;
-    let IndexDiff;
+    let BottomLength = 1;
 
-    $('.slides li img').click(function () {
-        let Imagesrc = $(this).attr('src');
-        let ImageIndex = $(this).parent('.slide').index();
-           
-        $('#MainImage').fadeOut('slow', function () {
-            if (ImageIndex <= lengthImages - BottomLength) {
-                IndexDiff = CurrImage;
-                CurrImage = ImageIndex;
-                IndexDiff = Math.abs(IndexDiff - CurrImage);
-                $('#slider .slides').animate({ 'margin-left': '-=' + widthImg * IndexDiff }, 1000);
-                $('#MainImage').attr('src', Imagesrc);
-
-                if (ImageIndex != 0) {
-                    if ($('#Previous').css("visibility") == "hidden") {
-                        $('#Previous').css("visibility", "visible");
-                    }
-                }
-                if (ImageIndex == lengthImages - BottomLength) {
-                    if ($('#Next').css("visibility") == "visible") {
-                        $('#Next').css("visibility", "hidden");
-                    }
-                }
-            }
-            else {
-                $('#MainImage').attr('src', Imagesrc);
-            }
-            }).fadeIn(1000);
-    });
     $('#Next').click(function () {
-        
-            $('#MainImage').fadeOut('slow', function () {
-                CurrImage = CurrImage + 1; // Update current image index
-                if (CurrImage <= lengthImages - BottomLength) {
-                    $('#slider .slides').animate({ 'margin-left': '-=' + widthImg }, 1000); //animate left margin of the slides list with the value of -widthImg (-200px). So the bottom slider will animate to left side
-                }
-                $('#MainImage').attr('src', tn_array[CurrImage]); // set image to Main image
-                if (CurrImage == lengthImages - BottomLength) {
-                    $('#Next').css("visibility", "hidden");
-                }
-                if ($('#Previous').css("visibility") == "hidden") { // 
-                    $('#Previous').css("visibility", "visible");
-                }
-            }).fadeIn(1000);
-        
+        $('#MainImage').fadeOut(function () {
+            CurrImage = CurrImage + 1;                  // Update current image index
+            if (CurrImage <= lengthImages - BottomLength) {
+                $('#slider .slides').animate({ 'margin-left': '-=' + widthImg }); //show back images when click next button
+            }
+            $('#MainImage').attr('src', tn_array[CurrImage]); // set image to Main image
+            if (CurrImage == lengthImages - BottomLength) {
+                $('#Next').css("visibility", "hidden");         // hide next button when last image
+            }
+            if ($('#Previous').css("visibility") == "hidden") { // hide previous button
+                $('#Previous').css("visibility", "visible");
+            }
+        }).fadeIn(500);
     });
     $('#Previous').click(function () {
-        $('#MainImage').fadeOut('slow', function () {
+        $('#MainImage').fadeOut(function () {
             CurrImage = CurrImage - 1;
-            $('#slider .slides').animate({ 'margin-left': '+=' + widthImg }, 1000);
+            $('#slider .slides').animate({ 'margin-left': '+=' + widthImg }); // show back images when click previous button
             $('#MainImage').attr('src', tn_array[CurrImage]);
             if (CurrImage == 0) {
-                $('#Previous').css("visibility", "hidden");
+                $('#Previous').css("visibility", "hidden");  // hide previous button
             }
-            if ($('#Next').css("visibility") == "hidden") {
+            if ($('#Next').css("visibility") == "hidden") { // hide next button
                 $('#Next').css("visibility", "visible");
             }
-
-        }).fadeIn(1000);
+        }).fadeIn(500);
     });
-
-
-    $('.slides li img').hover(function () {
-        $(this).css('cursor', 'pointer');
-        $(this).css({ 'filter': 'alpha(opacity=50)', 'opacity': '0.5' });
-    }, function () {
-        $(this).css('cursor', 'none');
-        $(this).css({ 'filter': 'alpha(opacity=100)', 'opacity': '1' });
-    });
-
-    //let CurrSlides = 0;
-
-    //setInterval(function () {
-    //    $('#slider .slides').animate({ 'margin-left': '-=200' }, 1000,
-    //        function () {
-    //            CurrSlides = CurrSlides + 1;
-    //            if (CurrSlides === tn_array.length-3) {
-    //                //CurrSlides = 0;
-    //                $('#slider .slides').css('margin-left', '600');
-    //            }
-    //        });
-    //}, 3000);
 });
 
